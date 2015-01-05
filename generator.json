@@ -1,0 +1,18 @@
+{
+	"baseName": "comiCollector",
+	"packageName": "com.github.nordinh.comicollector",
+	"entities": [],
+	"resources": [
+		{
+			"name": "CollectedSeries",
+			"methods": [
+				{
+					"methodName": "findCollectedSeries",
+					"methodType": "GET",
+					"methodPath": "/series/collected",
+					"formParams": []
+				}
+			]
+		}
+	]
+}
