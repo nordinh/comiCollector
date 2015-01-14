@@ -9,4 +9,4 @@ Study project covering:
  - Grunt/Gulp
  - MongoDB
  - AngularJS
- - Bootstrapord
+ - Bootstrap
