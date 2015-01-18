@@ -13,5 +13,13 @@
 			<groupId>${project.groupId}</groupId>
 			<artifactId>comicollector-api</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.commercehub.dropwizard</groupId>
+			<artifactId>dropwizard-mongo</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.mongojack</groupId>
+			<artifactId>mongojack</artifactId>
+		</dependency>
 	</dependencies>
 </project>
