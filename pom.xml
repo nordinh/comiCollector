@@ -27,26 +27,6 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>comicollector-api</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>comicollector-client</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>comicollector-application</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>comicollector-ui</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
 				<groupId>com.commercehub.dropwizard</groupId>
 				<artifactId>dropwizard-mongo</artifactId>
 				<version>2.0.0</version>
@@ -58,13 +38,6 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
-	<modules>
-		<module>comicollector-api</module>
-		<module>comicollector-client</module>
-		<module>comicollector-application</module>
-		<module>comicollector-ui</module>
-	</modules>
 
 	<build>
 		<plugins>
@@ -80,33 +53,4 @@
 		</plugins>
 	</build>
 
-	<profiles>
-		<profile>
-			<repositories>
-				<repository>
-					<snapshots>
-						<enabled>false</enabled>
-					</snapshots>
-					<id>central</id>
-					<name>bintray</name>
-					<url>http://jcenter.bintray.com</url>
-				</repository>
-			</repositories>
-			<pluginRepositories>
-				<pluginRepository>
-					<snapshots>
-						<enabled>false</enabled>
-					</snapshots>
-					<id>central</id>
-					<name>bintray-plugins</name>
-					<url>http://jcenter.bintray.com</url>
-				</pluginRepository>
-			</pluginRepositories>
-			<id>bintray</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-		</profile>
-	</profiles>
-	
 </project>
