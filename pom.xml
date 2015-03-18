@@ -12,6 +12,10 @@
 	<name>ComiCollector</name>
 	<description>Collector application for managing a comic book collection.</description>
 
+	<modules>
+		<module>comicollector-comicvine</module>
+	</modules>
+	
 	<properties>
 		<dropwizard.version>0.7.1</dropwizard.version>
 	</properties>
