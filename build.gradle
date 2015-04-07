@@ -1,0 +1,9 @@
+group = 'com.github.nordinh.comicollector'
+version = '0.0.1-SNAPSHOT'
+
+description = """comiCollector parent project"""
+
+repositories {
+	mavenCentral()
+	jcenter()
+}
