@@ -1,9 +1,15 @@
 package com.github.nordinh.comicollector.comicvine.volume;
 
+import io.dropwizard.jackson.JsonSnakeCase;
+
 import java.util.List;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonSnakeCase
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class VolumesResponse {
 	
 	private String error;

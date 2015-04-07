@@ -3,9 +3,14 @@ package com.github.nordinh.comicollector.comicvine;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.core.Link;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.github.nordinh.comicollector.comicvine.volume.VolumesResponse;
 
 public class ComicVineApiConsumer {
+	
+	private static final Logger log = LoggerFactory.getLogger(ComicVineApiConsumer.class);
 
 	private Client client;
 	private String volumesUri;
@@ -23,14 +28,16 @@ public class ComicVineApiConsumer {
 			@Override
 			public void run() {
 				try {
+					Link link = Link.fromUri(volumesUri).build(apiKey);
+					log.info("Calling " + link.toString());
 					VolumesResponse response = client
-						.target(Link.fromUri(volumesUri).build(apiKey))
+						.target(link)
 						.request()
 						.get()
 						.readEntity(VolumesResponse.class);
+					log.debug(response.toString());
 				} catch (Exception e) {
-					e.printStackTrace();
-					System.out.println("Something went wrong. Will retry in later.");
+					log.error("Failed to read volumes", e);
 				}
 			}
 		};

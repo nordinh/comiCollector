@@ -1,0 +1,9 @@
+volumesUrl: http://www.comicvine.com/api/volumes?format=json&api_key={apiKey}&sort=date_last_updated:desc
+apiKey: ebc22acd94902b6b8b1746df3648ef875d4e6dae
+jerseyClient:
+  timeout: 5000ms
+  connectionTimeout: 5000ms
+logging:
+  level: INFO
+  loggers:
+    "com.github.nordinh.comicollector.comicvine": DEBUG

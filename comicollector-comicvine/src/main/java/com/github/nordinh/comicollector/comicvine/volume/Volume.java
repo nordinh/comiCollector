@@ -1,24 +1,33 @@
 package com.github.nordinh.comicollector.comicvine.volume;
 
-import java.time.LocalDateTime;
+import io.dropwizard.jackson.JsonSnakeCase;
+
+import java.util.Date;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonSnakeCase
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Volume {
 
-	private LocalDateTime dateAdded;
-	private LocalDateTime dateLastUpdated;
+	@JsonFormat(pattern="yyyy-MM-dd hh:mm:ss")
+	private Date dateAdded;
+	@JsonFormat(pattern="yyyy-MM-dd hh:mm:ss")
+	private Date dateLastUpdated;
 	private String description;
 	private String name;
-	private int startYear;
+	private String startYear;
 	private VolumeImage image;
 	private VolumePublisher publisher;
 
-	public LocalDateTime getDateAdded() {
+	public Date getDateAdded() {
 		return dateAdded;
 	}
 
-	public LocalDateTime getDateLastUpdated() {
+	public Date getDateLastUpdated() {
 		return dateLastUpdated;
 	}
 
@@ -30,7 +39,7 @@ public class Volume {
 		return name;
 	}
 
-	public int getStartYear() {
+	public String getStartYear() {
 		return startYear;
 	}
 
