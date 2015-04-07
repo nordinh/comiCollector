@@ -1,43 +1,36 @@
 package com.github.nordinh.comicollector.comicvine;
 
-import java.time.Duration;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.Link;
+
+import com.github.nordinh.comicollector.comicvine.volume.VolumesResponse;
 
 public class ComicVineApiConsumer {
 
-	private static final long FREQUENCY = Duration.ofSeconds(15).toMillis();
-	private static final long DELAY = Duration.ofSeconds(0).toMillis();
-	private Timer timer;
 	private Client client;
+	private String volumesUri;
+	private String apiKey;
 
-	public ComicVineApiConsumer() {
-		client = ClientBuilder.newClient();
-		timer = new Timer(true);
+	public ComicVineApiConsumer(Client client, String volumesUri, String apiKey) {
+		this.client = client;
+		this.volumesUri = volumesUri;
+		this.apiKey = apiKey;
 	}
-
-	public void start() {
-		timer.schedule(pollVolumes(), DELAY, FREQUENCY);
-	}
-
-	private TimerTask pollVolumes() {
-		return new TimerTask() {
-
+	
+	public Runnable pollVolumes() {
+		return new Runnable() {
+			
 			@Override
 			public void run() {
 				try {
-					Volumes volumes = client
-						.target(Link.fromUri("").build())
+					VolumesResponse response = client
+						.target(Link.fromUri(volumesUri).build(apiKey))
 						.request()
 						.get()
-						.readEntity(Volumes.class);
+						.readEntity(VolumesResponse.class);
 				} catch (Exception e) {
 					e.printStackTrace();
-					System.out.println("Something went wrong. Will retry in " + FREQUENCY);
+					System.out.println("Something went wrong. Will retry in later.");
 				}
 			}
 		};
