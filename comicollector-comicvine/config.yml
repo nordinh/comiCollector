@@ -1,4 +1,5 @@
-volumesUrl: http://www.comicvine.com/api/volumes?format=json&api_key={apiKey}&sort=date_last_updated:desc
+volumesUrl: http://www.comicvine.com/api/volumes/?format=json&api_key={apiKey}&offset={offset}&sort=date_last_updated:asc
+volumesBookmarkUrl: http://www.comicvine.com/api/volumes/?format=json&api_key={apiKey}&limit=1&sort=date_last_updated:asc&field_list=date_last_updated
 apiKey: ebc22acd94902b6b8b1746df3648ef875d4e6dae
 jerseyClient:
   timeout: 5000ms
@@ -7,3 +8,6 @@ logging:
   level: INFO
   loggers:
     "com.github.nordinh.comicollector.comicvine": DEBUG
+mongo:
+  uri: mongodb://localhost:27017/?maxPoolSize=1&maxIdleTimeMS=300000
+  dbName: comiCollection

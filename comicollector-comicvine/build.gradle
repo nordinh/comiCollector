@@ -18,11 +18,15 @@ project.ext {
 repositories {
 	mavenCentral()
 	jcenter()
+	maven {
+        url "https://github.com/nordinh/maven-repo/raw/master/"
+    }
 }
 
 dependencies {
     compile group: 'io.dropwizard', name: 'dropwizard-core', version:dropwizardVersion
     compile group: 'io.dropwizard', name: 'dropwizard-client', version:dropwizardVersion
+    compile group: 'com.github.nordinh', name: 'dropwizard-mongo-bundle', version: '0.0.1-SNAPSHOT'
 }
 
 run {
@@ -38,9 +42,4 @@ task fatJar(type: Jar) {
     baseName = project.name
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
-}
-
-dependencies {
-    compile group: 'io.dropwizard', name: 'dropwizard-core', version:dropwizardVersion
-    compile group: 'io.dropwizard', name: 'dropwizard-client', version:dropwizardVersion
 }

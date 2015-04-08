@@ -6,9 +6,12 @@ import io.dropwizard.client.JerseyClientConfiguration;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import com.commercehub.dropwizard.mongo.MongoClientFactory;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.nordinh.dropwizard.mongo.MongoConfiguration;
 
-public class ComicVineConsumerConfiguration extends Configuration {
+public class ComicVineConsumerConfiguration extends Configuration
+		implements MongoConfiguration {
 	
 	@Valid
     @NotNull
@@ -16,9 +19,26 @@ public class ComicVineConsumerConfiguration extends Configuration {
 	
 	@NotNull
 	private String volumesUrl;
+	
+	@NotNull
+	private String volumesBookmarkUrl;
 
 	@NotNull
 	private String apiKey;
+	
+	@Valid
+	@NotNull
+	private MongoClientFactory mongo;
+
+	@JsonProperty
+	public MongoClientFactory getMongo() {
+		return mongo;
+	}
+
+	@JsonProperty
+	public void setMongo(MongoClientFactory mongo) {
+		this.mongo = mongo;
+	}
 	
 	public JerseyClientConfiguration getJerseyClient() {
         return jerseyClient;
@@ -27,6 +47,11 @@ public class ComicVineConsumerConfiguration extends Configuration {
 	@JsonProperty
 	public String getVolumesUrl() {
 		return volumesUrl;
+	}
+	
+	@JsonProperty
+	public String getVolumesBookmarkUrl() {
+		return volumesBookmarkUrl;
 	}
 	
 	@JsonProperty

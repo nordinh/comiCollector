@@ -8,19 +8,24 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonSnakeCase
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class VolumePublisher {
-
-	private Long id;
-	private String name;
-
-	public Long getId() {
-		return id;
-	}
-
-	public String getName() {
-		return name;
-	}
+public class VolumesBookmarkResponse {
 	
+	private String error;
+	private int numberOfTotalResults;
+	private int statusCode;
+
+	public String getError() {
+		return error;
+	}
+
+	public int getNumberOfTotalResults() {
+		return numberOfTotalResults;
+	}
+
+	public int getStatusCode() {
+		return statusCode;
+	}
+
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);

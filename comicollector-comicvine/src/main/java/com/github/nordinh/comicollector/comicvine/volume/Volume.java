@@ -4,6 +4,8 @@ import io.dropwizard.jackson.JsonSnakeCase;
 
 import java.util.Date;
 
+import javax.persistence.Id;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -13,6 +15,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Volume {
 
+	@Id
+	private Long id;
 	@JsonFormat(pattern="yyyy-MM-dd hh:mm:ss")
 	private Date dateAdded;
 	@JsonFormat(pattern="yyyy-MM-dd hh:mm:ss")
@@ -23,6 +27,10 @@ public class Volume {
 	private VolumeImage image;
 	private VolumePublisher publisher;
 
+	public Long getId() {
+		return id;
+	}
+	
 	public Date getDateAdded() {
 		return dateAdded;
 	}
