@@ -1,8 +1,6 @@
 package com.github.nordinh.comicollector.comicvine;
 
-import java.time.Clock;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.core.Link;
@@ -10,7 +8,6 @@ import javax.ws.rs.core.Link;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.nordinh.comicollector.comicvine.volume.Volume;
 import com.github.nordinh.comicollector.comicvine.volume.VolumeRepository;
 import com.github.nordinh.comicollector.comicvine.volume.VolumesBookmarkResponse;
 import com.github.nordinh.comicollector.comicvine.volume.VolumesResponse;

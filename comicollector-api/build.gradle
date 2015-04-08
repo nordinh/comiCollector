@@ -1,0 +1,22 @@
+apply plugin: 'java'
+
+group = 'com.github.nordinh.comicollector'
+version = '0.0.1-SNAPSHOT'
+
+description = """comiCollector API"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+project.ext {
+    dropwizardVersion = '0.8.0'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+    compile group: 'io.dropwizard', name: 'dropwizard-core', version:dropwizardVersion
+    compile group: 'javax.persistence', name: 'persistence-api', version: '1.0.2'
+}

@@ -1,4 +1,4 @@
-package com.github.nordinh.comicollector.comicvine.volume;
+package com.github.nordinh.comicollector.api;
 
 import io.dropwizard.jackson.JsonSnakeCase;
 

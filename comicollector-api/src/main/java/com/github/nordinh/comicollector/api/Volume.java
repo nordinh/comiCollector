@@ -1,5 +1,6 @@
-package com.github.nordinh.comicollector.comicvine.volume;
+package com.github.nordinh.comicollector.api;
 
+import static com.fasterxml.jackson.annotation.JsonFormat.Shape.STRING;
 import io.dropwizard.jackson.JsonSnakeCase;
 
 import java.util.Date;
@@ -17,9 +18,9 @@ public class Volume {
 
 	@Id
 	private Long id;
-	@JsonFormat(pattern="yyyy-MM-dd hh:mm:ss")
+	@JsonFormat(shape=STRING, pattern="yyyy-MM-dd hh:mm:ss")
 	private Date dateAdded;
-	@JsonFormat(pattern="yyyy-MM-dd hh:mm:ss")
+	@JsonFormat(shape=STRING, pattern="yyyy-MM-dd hh:mm:ss")
 	private Date dateLastUpdated;
 	private String description;
 	private String name;

@@ -27,6 +27,7 @@ dependencies {
     compile group: 'io.dropwizard', name: 'dropwizard-core', version:dropwizardVersion
     compile group: 'io.dropwizard', name: 'dropwizard-client', version:dropwizardVersion
     compile group: 'com.github.nordinh', name: 'dropwizard-mongo-bundle', version: '0.0.1-SNAPSHOT'
+    compile project(':comicollector-api')
 }
 
 run {

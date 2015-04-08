@@ -1,1 +1,1 @@
-include 'comicollector-comicvine'
+include 'comicollector-api','comicollector-comicvine'

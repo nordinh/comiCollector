@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.mongojack.JacksonDBCollection;
 
+import com.github.nordinh.comicollector.api.Volume;
 import com.mongodb.DB;
 
 public class VolumeRepository {
