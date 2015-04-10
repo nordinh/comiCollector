@@ -5,17 +5,17 @@ import io.dropwizard.client.JerseyClientBuilder;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
-import java.net.UnknownHostException;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import javax.ws.rs.client.Client;
 
-import com.commercehub.dropwizard.mongo.ManagedMongoClient;
+import com.github.nordinh.comicollector.comicvine.consumption.ComicVineConsumptionBookmarkRepository;
+import com.github.nordinh.comicollector.comicvine.issue.IssueRepository;
+import com.github.nordinh.comicollector.comicvine.issue.IssuesConsumer;
 import com.github.nordinh.comicollector.comicvine.volume.VolumeRepository;
+import com.github.nordinh.comicollector.comicvine.volume.VolumesConsumer;
 import com.github.nordinh.dropwizard.mongo.MongoBundle;
-import com.github.nordinh.dropwizard.mongo.MongoHealthCheck;
-import com.mongodb.DB;
 
 public class ComicVineConsumerApplication extends Application<ComicVineConsumerConfiguration> {
 	
@@ -27,24 +27,39 @@ public class ComicVineConsumerApplication extends Application<ComicVineConsumerC
 
 	@Override
 	public void run(ComicVineConsumerConfiguration configuration, Environment environment) throws Exception {
-		VolumeRepository volumeRepository = new VolumeRepository(mongoBundle.getDb());
+		ComicVineConsumptionBookmarkRepository comicVineConsumptionBookmarkRepository = new ComicVineConsumptionBookmarkRepository(mongoBundle.getDb());
 		
 		Client client = new JerseyClientBuilder(environment)
 				.using(configuration.getJerseyClient())
 				.build("ComicVine");
 		
-		ComicVineApiConsumer comicVineApiConsumer = new ComicVineApiConsumer(
+		VolumeRepository volumeRepository = new VolumeRepository(mongoBundle.getDb());
+		VolumesConsumer comicVineApiConsumer = new VolumesConsumer(
 				client,
 				volumeRepository,
-				configuration.getVolumesBookmarkUrl(),
-				configuration.getVolumesUrl(),
+				comicVineConsumptionBookmarkRepository,
+				configuration.getVolumes(),
 				configuration.getApiKey());
 		
 		ScheduledExecutorService syncVolumes = environment
 				.lifecycle()
 				.scheduledExecutorService("sync-comicvine-volumes", true)
 				.build();
-		syncVolumes.scheduleWithFixedDelay(comicVineApiConsumer.pollVolumes(), 1, 30, TimeUnit.MINUTES);
+		syncVolumes.scheduleWithFixedDelay(comicVineApiConsumer.pollEntries(), 0, 30, TimeUnit.MINUTES);
+		
+		IssueRepository issueRepository = new IssueRepository(mongoBundle.getDb());
+		IssuesConsumer issueConsumer = new IssuesConsumer(
+				client,
+				issueRepository,
+				comicVineConsumptionBookmarkRepository,
+				configuration.getIssues(),
+				configuration.getApiKey());
+		
+		ScheduledExecutorService syncIssues = environment
+				.lifecycle()
+				.scheduledExecutorService("sync-comicvine-issues", true)
+				.build();
+		syncIssues.scheduleWithFixedDelay(issueConsumer.pollEntries(), 0, 30, TimeUnit.MINUTES);
 	}
 	
 	@Override

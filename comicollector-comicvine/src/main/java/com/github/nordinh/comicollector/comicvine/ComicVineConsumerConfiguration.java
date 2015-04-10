@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 
 import com.commercehub.dropwizard.mongo.MongoClientFactory;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.nordinh.comicollector.comicvine.consumption.ComicVineConsumptionEntryConfiguration;
 import com.github.nordinh.dropwizard.mongo.MongoConfiguration;
 
 public class ComicVineConsumerConfiguration extends Configuration
@@ -18,10 +19,10 @@ public class ComicVineConsumerConfiguration extends Configuration
     private JerseyClientConfiguration jerseyClient = new JerseyClientConfiguration();
 	
 	@NotNull
-	private String volumesUrl;
-	
+	private ComicVineConsumptionEntryConfiguration volumes;
+
 	@NotNull
-	private String volumesBookmarkUrl;
+	private ComicVineConsumptionEntryConfiguration issues;
 
 	@NotNull
 	private String apiKey;
@@ -45,13 +46,13 @@ public class ComicVineConsumerConfiguration extends Configuration
     }
 	
 	@JsonProperty
-	public String getVolumesUrl() {
-		return volumesUrl;
+	public ComicVineConsumptionEntryConfiguration getVolumes() {
+		return volumes;
 	}
 	
 	@JsonProperty
-	public String getVolumesBookmarkUrl() {
-		return volumesBookmarkUrl;
+	public ComicVineConsumptionEntryConfiguration getIssues() {
+		return issues;
 	}
 	
 	@JsonProperty

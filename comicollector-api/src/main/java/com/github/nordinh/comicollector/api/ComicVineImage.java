@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonSnakeCase
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class VolumeImage {
+public class ComicVineImage {
 	
 	private String thumbUrl;
 
