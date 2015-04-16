@@ -15,7 +15,7 @@ public class Issue extends ComicVineEntry {
 	private String issueNumber;
 	private ComicVineImage image;
 	private Date storeDate;
-	private Long Volume;
+	private IssueVolume volume;
 
 	public String getDescription() {
 		return description;
@@ -37,8 +37,8 @@ public class Issue extends ComicVineEntry {
 		return storeDate;
 	}
 
-	public Long getVolume() {
-		return Volume;
+	public IssueVolume getVolume() {
+		return volume;
 	}
 
 }

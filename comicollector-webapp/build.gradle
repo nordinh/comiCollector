@@ -1,0 +1,45 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+group = 'com.github.nordinh.comicollector'
+version = '0.0.1-SNAPSHOT'
+
+description = """comiCollector web application"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+mainClassName = "com.github.nordinh.comicollector.webapp.ComiCollectorWebApplication"
+
+project.ext {
+    dropwizardVersion = '0.8.0'
+}
+
+repositories {
+	mavenCentral()
+	jcenter()
+	maven {
+        url "https://github.com/nordinh/maven-repo/raw/master/"
+    }
+}
+
+dependencies {
+    compile group: 'io.dropwizard', name: 'dropwizard-core', version:dropwizardVersion
+    compile group: 'io.dropwizard', name: 'dropwizard-assets', version:dropwizardVersion
+    compile project(':comicollector-api')
+}
+
+run {
+    args 'server', 'config.yml'
+}
+
+task fatJar(type: Jar) {
+	manifest {
+        attributes 'Implementation-Title': 'comiCollector Web Application',  
+        	'Implementation-Version': version,
+        	'Main-Class': mainClassName
+    }
+    baseName = project.name
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}

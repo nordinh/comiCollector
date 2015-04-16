@@ -5,11 +5,17 @@ import io.dropwizard.client.JerseyClientBuilder;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
+import java.io.IOException;
+import java.util.Date;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import javax.ws.rs.client.Client;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.deser.std.DateDeserializers;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.github.nordinh.comicollector.comicvine.consumption.ComicVineConsumptionBookmarkRepository;
 import com.github.nordinh.comicollector.comicvine.issue.IssueRepository;
 import com.github.nordinh.comicollector.comicvine.issue.IssuesConsumer;
@@ -64,8 +70,25 @@ public class ComicVineConsumerApplication extends Application<ComicVineConsumerC
 	
 	@Override
 	public void initialize(Bootstrap<ComicVineConsumerConfiguration> bootstrap) {
+		bootstrap.getObjectMapper().registerModule(getIgnoreWrongDateFormatModule());
 		mongoBundle = new MongoBundle();
 		bootstrap.addBundle(mongoBundle);
+	}
+
+	@SuppressWarnings("serial")
+	private SimpleModule getIgnoreWrongDateFormatModule() {
+		SimpleModule module = new SimpleModule();
+		module.addDeserializer(Date.class, new DateDeserializers.DateDeserializer() {
+			@Override
+			public Date deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
+				try {
+					return super.deserialize(jp, ctxt);
+				} catch (Exception e) {
+					return null;
+				}
+			}
+		});
+		return module;
 	}
 
 }

@@ -10,7 +10,7 @@ import com.github.nordinh.comicollector.api.ComicVineEntry;
 
 public abstract class ComicVineApiConsumer<E extends ComicVineEntry, P extends ComicVinePage<E>, R extends ComicVineEntryRepository<E>> {
 	
-	private static final Logger log = LoggerFactory.getLogger(ComicVineApiConsumer.class);
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
 	private Client client;
 	private ComicVineConsumptionEntryConfiguration uris;
@@ -40,6 +40,7 @@ public abstract class ComicVineApiConsumer<E extends ComicVineEntry, P extends C
 			@Override
 			public void run() {
 				try {
+					log.info("Polling for new entries");
 					ComicVineConsumptionBookmark bookmarkLatestConsumption = comicVineConsumptionBookmarkRepository.findById(entryRepository.getCollectionName());
 					
 					if (!bookmarkLatestConsumption.hasTaskToBeCompleted()) {
@@ -53,7 +54,7 @@ public abstract class ComicVineApiConsumer<E extends ComicVineEntry, P extends C
 						comicVineConsumptionBookmarkRepository.store(bookmarkLatestConsumption);
 					}
 				} catch (Exception e) {
-					log.error("Failed to read volumes", e);
+					log.error("Failed to read " + entryRepository.getCollectionName(), e);
 				}
 			}
 		};

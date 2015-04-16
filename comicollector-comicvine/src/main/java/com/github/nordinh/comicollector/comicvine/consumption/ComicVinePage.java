@@ -7,10 +7,12 @@ import java.util.List;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.github.nordinh.comicollector.api.ComicVineEntry;
 import com.google.common.collect.Iterables;
 
 @JsonSnakeCase
+@JsonIgnoreProperties({"dateLastModified"})
 public abstract class ComicVinePage<T extends ComicVineEntry> {
 
 	private String error;
