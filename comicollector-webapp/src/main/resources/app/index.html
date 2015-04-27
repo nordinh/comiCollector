@@ -1,83 +1,58 @@
 <html lang="en" ng-app="comiCollectorApp">
-  <head>
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/stylesheet.css">
-    <meta name="viewport" content="initial-scale=1" />
-  </head>
-  <body layout="column" ng-controller="AppCtrl">
-    <md-toolbar layout="row">
-      <button ng-click="toggleSidenav('left')" hide-gt-sm class="menuBtn">
-        <span class="visually-hidden">Menu</span>
-      </button>
-      <h1 class="md-toolbar-tools" layout-align-gt-sm="center">comiCollector</h1>
-    </md-toolbar>
-    <div layout="row" flex>
-        <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
-          <md-list>
-          	<md-list-item role="listitem" class="md-clickable">
-          		<button class="md-no-style">
-          			<div class="md-list-item-inner">
-    					<md-icon md-font-icon="fa fa-home fa-lg"></md-icon>
-    					<p>Home</p>
-  					</div>
-  				</button>
-          	</md-list-item>
-          	<md-list-item role="listitem" class="md-clickable">
-          		<button class="md-no-style">
-          			<div class="md-list-item-inner">
-    					<md-icon md-font-icon="fa fa-check-square fa-lg"></md-icon>
-    					<p>My Collection</p>
-  					</div>
-  				</button>
-          	</md-list-item>
-          	<md-list-item role="listitem" class="md-clickable">
-          		<button class="md-no-style">
-          			<div class="md-list-item-inner">
-    					<md-icon md-font-icon="fa fa-bookmark fa-lg"></md-icon>
-    					<p>My Wishlist</p>
-  					</div>
-  				</button>
-          	</md-list-item>
-          	<md-list-item role="listitem" class="md-clickable">
-          		<button class="md-no-style">
-          			<div class="md-list-item-inner">
-    					<md-icon md-font-icon="fa fa-users fa-lg"></md-icon>
-    					<p>People</p>
-  					</div>
-  				</button>
-          	</md-list-item>
-          	<md-divider></md-divider>
-          	<md-list-item role="listitem" class="md-clickable">
-          		<button class="md-no-style">
-          			<div class="md-list-item-inner">
-    					<md-icon md-font-icon="fa fa-comments fa-lg"></md-icon>
-    					<p>FAQ</p>
-  					</div>
-  				</button>
-          	</md-list-item>
-          	<md-list-item role="listitem" class="md-clickable">
-          		<button class="md-no-style">
-          			<div class="md-list-item-inner">
-    					<md-icon md-font-icon="fa fa-cog fa-lg"></md-icon>
-    					<p>Settings</p>
-  					</div>
-  				</button>
-          	</md-list-item>
-          </md-list>
-        </md-sidenav>
-        <div layout="column" flex id="content">
-            <md-content layout="column" flex class="md-padding">
-
-            </md-content>
-        </div>
-    </div>
-    <!-- Angular Material Dependencies -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.js"></script>
-    <script src="main.js"></script>
-  </body>
+	<head>
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/stylesheet.css">
+		<meta name="viewport" content="initial-scale=1" />
+	</head>
+	<body layout="column" ng-controller="AppCtrl">
+    	<md-toolbar layout="row">
+    		<md-button ng-click="toggleSidenav('left')" class="md-icon-button" hide-gt-sm aria-label="Menu">
+        		<md-icon md-font-icon="fa-bars" class="fa"></md-icon>
+     		</md-button>
+      		<h1 class="md-toolbar-tools" layout-align-gt-sm="center">comiCollector</h1>
+   		</md-toolbar>
+		<div layout="row" flex>
+			<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
+				<md-list class="menu">
+					<md-list-item class="md-button md-default-theme" ng-class="{'md-accent':isActive('/home')}" ng-click="navigateTo('/home')" layout="column" layout-align="center center">
+	    				<md-icon md-font-icon="fa-home" class="fa"></md-icon>
+	    				<p>Home</p>
+	    			</md-list-item>
+					<md-list-item class="md-button md-default-theme" ng-class="{'md-accent':isActive('/collection')}" ng-click="navigateTo('/collection')" layout="column" layout-align="center center">
+	    				<md-icon md-font-icon="fa-check-square" class="fa"></md-icon>
+	    				<p>My Collection</p>
+	    			</md-list-item>
+					<md-list-item class="md-button md-default-theme" ng-class="{'md-accent':isActive('/wishlist')}" ng-click="navigateTo('/wishlist')" layout="column" layout-align="center center">
+	    				<md-icon md-font-icon="fa-bookmark" class="fa"></md-icon>
+	    				<p>My Wishlist</p>
+	    			</md-list-item>
+					<md-list-item class="md-button md-default-theme" ng-class="{'md-accent':isActive('/people')}" ng-click="navigateTo('/people')" layout="column" layout-align="center center">
+	    				<md-icon md-font-icon="fa-users" class="fa"></md-icon>
+	    				<p>People</p>
+	    			</md-list-item>
+	          		<md-divider></md-divider>
+					<md-list-item class="md-button md-default-theme" ng-class="{'md-accent':isActive('/faq')}" ng-click="navigateTo('/faq')" layout="column" layout-align="center center">
+	    				<md-icon md-font-icon="fa-comments" class="fa"></md-icon>
+	    				<p>FAQ</p>
+	    			</md-list-item>
+					<md-list-item class="md-button md-default-theme" ng-class="{'md-accent':isActive('/settings')}" ng-click="navigateTo('/settings')" layout="column" layout-align="center center">
+	    				<md-icon md-font-icon="fa-cog" class="fa"></md-icon>
+	    				<p>Settings</p>
+	    			</md-list-item>
+				</md-list>
+			</md-sidenav>
+	        <div layout="column" flex id="content">
+	        	<div ng-view></div>
+	        </div>
+	    </div>
+	    <!-- Angular Material Dependencies -->
+	    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+	    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
+	    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script>
+	    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-route.min.js"></script>
+	    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.js"></script>
+	    <script src="main.js"></script>
+	</body>
 </html>
