@@ -13,4 +13,4 @@ logs
 node_modules
 target
 .gradle
-/build/
+build/
